@@ -16,7 +16,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/linearLayout" />
+        android:layout_above="@+id/linearLayout"
+        android:src="@drawable/rgb"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gradient"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -29,17 +35,15 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Standart"
-            android:id="@+id/standartButton"
+            android:text="Add gradient"
+            android:id="@+id/addGradient"
             android:layout_weight="1" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invert G&amp;B"
-            android:id="@+id/invertButton"
+            android:text="Delete gradient"
+            android:id="@+id/deleteGradient"
             android:layout_weight="1" />
     </LinearLayout>
-
-
 </RelativeLayout>

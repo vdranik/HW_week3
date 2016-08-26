@@ -1,58 +1,52 @@
 package ua.com.vdranik.hw_week3;
 
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView imageView;
-    private Drawable myDrawable;
+    private View gradient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imageView = (ImageView) findViewById(R.id.imageView);
-        Button standartButton = (Button) findViewById(R.id.standartButton);
-        Button invertButton = (Button) findViewById(R.id.invertButton);
-        standartButton.setOnClickListener(this);
-        invertButton.setOnClickListener(this);
-        myDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.rgb, null);
-        myDrawable.setColorFilter(new ColorMatrixColorFilter(STANDART)); // do nothing
-        imageView.setImageDrawable(myDrawable);
+        gradient = findViewById(R.id.gradient);
+        Button addGradientButton = (Button) findViewById(R.id.addGradient);
+        Button deleteGradientButton = (Button) findViewById(R.id.deleteGradient);
+        addGradientButton.setOnClickListener(this);
+        deleteGradientButton.setOnClickListener(this);
     }
-
-    private static final float[] STANDART = {
-            1.0f, 0, 0, 0, 0,     // red
-            0, 1.0f, 0, 0, 0,      // green
-            0, 0, 1.0f, 0, 0,      // blue
-            0, 0, 0, 1.0f, 0       // alpha
-    };
-
-    private static final float[] INVERT_GREEN_AND_RED = {
-            1.0f, 0, 0, 0, 0,  // red
-            0, -1.0f, 0, 0, 255,     // green
-            0, 0, -1.0f, 0, 255,   // blue
-            0, 0, 0, 1.0f, 0  // alpha
-    };
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.standartButton:
-                myDrawable.setColorFilter(new ColorMatrixColorFilter(STANDART));
-                imageView.setImageDrawable(myDrawable);
+            case R.id.addGradient:
+
+                GradientDrawable gd = new GradientDrawable();
+                gd.setColors(new int[]{
+                        Color.RED,
+                        Color.WHITE,
+                        Color.YELLOW,
+                        Color.BLACK,
+                        Color.GREEN,
+                        Color.CYAN,
+                        Color.MAGENTA,
+                        Color.TRANSPARENT
+                });
+
+                gd.setGradientType(GradientDrawable.RADIAL_GRADIENT);
+                gd.setGradientRadius(150);
+                gd.setShape(GradientDrawable.RECTANGLE);
+                gradient.setBackground(gd);
                 break;
-            case R.id.invertButton:
-                myDrawable.setColorFilter(new ColorMatrixColorFilter(INVERT_GREEN_AND_RED));
-                imageView.setImageDrawable(myDrawable);
+            case R.id.deleteGradient:
+                gradient.setBackground(null);
                 break;
         }
     }
